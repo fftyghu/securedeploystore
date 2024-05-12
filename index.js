@@ -1,16 +1,17 @@
-function longestPalindrome(s) {
-  const map = new Map();
-  let hasOdd = false;
-  let result = 0;
-  for (const char of s) {
-    map.set(char, (map.get(char) || 0) + 1);
-  }
-  for (const count of map.values()) {
-    if (count % 2 === 0) result += count;
-    else {
-      result += count - 1;
-      hasOdd = true;
+function combinationSum(candidates, target) {
+  const result = [];
+  backtrack(0, [], 0);
+  return result;
+  function backtrack(start, current, sum) {
+    if (sum === target) {
+      result.push([...current]);
+      return;
+    }
+    if (sum > target || start === candidates.length) return;
+    for (let i = start; i < candidates.length; i++) {
+      current.push(candidates[i]);
+      backtrack(i, current, sum + candidates[i]);
+      current.pop();
     }
   }
-  return hasOdd ? result + 1 : result;
 }
